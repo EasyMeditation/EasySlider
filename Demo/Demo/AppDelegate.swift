@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Demo
 //
-//  Created by tqtifnypmb on 5/19/16.
-//  Copyright © 2016 easymx. All rights reserved.
+//  Created by 王荣荣 on 5/19/16.
+//  Copyright © 2016 王荣荣. All rights reserved.
 //
 
 import UIKit
