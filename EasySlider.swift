@@ -50,26 +50,27 @@ class EasySlider: UISlider {
         }
     }
    
-    private var thumbImage: UIImage! = UIImage()
+    private var thumbImage: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.thumbImage = self.generateThumbImage()
+        self.setThumbImage(self.thumbImage, forState: .Normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.thumbImage = self.generateThumbImage()
-    }
-    
-    override func awakeFromNib() {
         self.setThumbImage(self.thumbImage, forState: .Normal)
     }
     
     override func trackRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRect(x: 0, y: 0, width: CGRectGetWidth(bounds), height: self.trackHeight)
+        var trackBounds = super.trackRectForBounds(bounds)
+        trackBounds.size.height = self.trackHeight
+        
+        return trackBounds
     }
-    
+ 
     override func thumbRectForBounds(bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
         var newX = CGRectGetMinX(rect) + CGRectGetWidth(rect) * CGFloat(value)
         let newY = CGRectGetMinY(rect)
@@ -80,7 +81,7 @@ class EasySlider: UISlider {
         
         return CGRectMake(newX, newY, self.thumbSize.width, self.thumbSize.height)
     }
-    
+ 
     private func generateThumbImage() -> UIImage {
         UIGraphicsBeginImageContext(self.thumbSize)
         let path = UIBezierPath(rect: CGRectMake(0, 0, self.thumbSize.width, self.thumbSize.height))
